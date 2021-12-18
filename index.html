@@ -1,0 +1,88 @@
+<!-- DOCTYPE html -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Zebrafish Tracker</title>
+    <link rel="stylesheet" href="css/normalizer.css"></link>
+    <link rel="stylesheet" href="css/style.css"></link>
+    <script src="lib/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <script async src="lib/opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
+  </head>
+  <body>
+    <div class="video-cropper">
+      <video id="upload-preview" src="footage/5.13.21 Behavior3.mp4" alt="No Video Uploaded"></video>
+    </div>
+    <div class="columns">
+      <div>
+        <h3>Preview</h3>
+        <canvas id="output" onmousedown="handlers.mouseDown();" onmouseup="handlers.mouseUp();" onmouseout="handlers.mouseOut();" onmousemove="handlers.mouseMove(event)"></canvas>
+        <canvas id="mask-output"></canvas>
+      </div>
+      <div>
+        <h3>Upload video to track: </h3>
+        <input id="file-upload" type="file">
+        <h3>HSV Range: </h3>
+        <table><tbody>
+          <tr>
+            <th></th><th>Hue</th><th>Saturation</th><th>Value</th>
+          </tr>
+          <tr>
+            <td>Min</td>
+            <td><input id="low-hue" type="range" min="0" max="255" value="0" class="slider" id="myRange"></td>
+            <td><input id="low-sat" type="range" min="1" max="63" value="30" class="slider" id="myRange"></td>
+            <td><input id="low-val" type="range" min="0" max="255" value="6" class="slider" id="myRange"></td>
+          </tr>
+          <tr>
+            <td>Max</td>
+            <td><input id="high-hue" type="range" min="0" max="255" value="106" class="slider" id="myRange"></td>
+            <td><input id="high-sat" type="range" min="0" max="248" value="255" class="slider" id="myRange"></td>
+            <td><input id="high-val" type="range" min="0" max="149" value="255" class="slider" id="myRange"></td>
+          </tr>
+        </tbody></table>
+        <h3>Controls</h3>
+        <button onclick="handlers.track()">Play</button>
+        <button onclick="handlers.pause()">Pause</button>
+        <button onclick="handlers.restart()">Restart</button>
+        <button onclick="handlers.selectFish()">Select Fish</button>
+        <div>
+          <label>New Arena: </label>
+          <input type="text" name="Arena Label" id="arena-label" value="Tank">
+          <button onclick="handlers.newArena()">Add</button>
+        </div>
+        <h3>Information</h3>
+        <div class="columns">
+          <div>
+            <h4>Status: </h4>
+            <span id="status">None</span>
+            <h4>State: </h4>
+            <span id="state">None</span>
+          </div>
+          <div>
+            <h4>Position (relative to top left of Tank): </h4>
+            <label>Current: </label><p id="position"></p>
+            <label>Average: </label><p id="average-position"></p>
+            <h4>Speed (cm/sec): </h4>
+            <label>Current: </label><p id="speed"></p>
+            <label>Average: </label><p id="average-speed"></p>
+            <h4>Times the fish turned around: </h4>
+            <p id="velocity"></p>
+          </div>
+        </div>
+
+        <h4>Arenas:</h4>
+        <table class="data-table">
+          <tbody id="arena-table">
+            <tr>
+              <th>Name</th><th>Time Spent Within (sec)</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="lib/globals.js" type="text/javascript"></script>
+    <script src="lib/Fish.js" type="text/javascript"></script>
+    <script src="lib/Arena.js" type="text/javascript"></script>
+    <script src="lib/index.js" type="text/javascript"></script>
+  </body>
+</html>

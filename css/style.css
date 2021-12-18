@@ -1,0 +1,56 @@
+:root {
+  font-family: arial, sans-serif;
+}
+
+body {
+  padding: 2em;
+}
+
+h3 {
+  margin-top: 1em;
+}
+
+input, button {
+  margin-bottom: .3em;
+}
+
+th {
+  font-weight: normal;
+}
+
+.video-cropper {
+  position: absolute;
+  overflow: hidden;
+  width: 0px;
+}
+
+video {
+  visibility: hidden;
+}
+
+.columns {
+  display: flex;
+}
+
+.columns > * {
+  margin-left: 1em;
+  border-left: 1px solid #00000020;
+  padding-left: 1em;
+}
+
+.columns > *:first-child {
+  margin-left: unset;
+  border-left: unset;
+  padding-left: unset;
+}
+
+canvas {
+  display: block;
+  height: 20em;
+}
+
+table.data-table, table.data-table th, table.data-table td {
+  border: 1px solid black;
+  padding: 5px;
+  border-collapse: collapse;
+}
